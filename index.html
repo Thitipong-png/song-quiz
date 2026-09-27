@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- YouTube ต้องได้รับ Referer ไม่งั้นขึ้น error 153 -->
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <title>เกมทายเพลง</title>
+  <link rel="stylesheet" href="css/style.css?v=1">
+</head>
+<body>
+  <header class="top">
+    <h1>เกมทายเพลง</h1>
+  </header>
+
+  <!-- ตัวเล่น YouTube: ขนาดเล็กแต่ไม่ต่ำกว่า 200×200 และห้ามมีอะไรทับ -->
+  <section class="player-area" aria-label="ตัวเล่นวิดีโอ">
+    <div id="player"></div>
+    <p class="hint">เลื่อนจอลงเพื่อหลบภาพวิดีโอ</p>
+  </section>
+
+  <!--
+    ทุกอย่างที่อยู่ใต้ตัวเล่นอยู่ใน <main>
+    การ์ดลอยเป็น sticky ภายใน <main> จึงขึ้นไปสูงกว่าขอบบนของ <main> ไม่ได้
+    = ไม่มีทางทับตัวเล่น ไม่ว่าจะเลื่อนจอไปตรงไหน
+  -->
+  <main class="stage">
+    <form id="setup-form" class="setup" aria-label="ตั้งค่า">
+      <label>
+        ลิงก์เพลย์ลิสต์ YouTube
+        <input id="playlist-url" type="text" placeholder="https://www.youtube.com/playlist?list=..." autocomplete="off" disabled>
+      </label>
+      <label>
+        ความยาวท่อน
+        <select id="snippet-length" disabled>
+          <option value="5">5 วินาที</option>
+          <option value="10" selected>10 วินาที</option>
+          <option value="15">15 วินาที</option>
+        </select>
+      </label>
+      <button id="load-btn" type="submit" disabled>โหลดเพลย์ลิสต์</button>
+      <p id="load-msg" class="note" aria-live="polite"></p>
+    </form>
+
+    <div class="dock">
+      <!-- การ์ดเฉลย: เด้งเมื่อกด "ถัดไป" ปิดได้ด้วยปุ่มปิดเท่านั้น อยู่ใน dock จึงไม่ทับตัวเล่น -->
+      <div id="reveal-card" class="card reveal" role="dialog" aria-labelledby="reveal-heading" hidden>
+        <p id="reveal-heading" class="reveal-heading">เฉลย · <span id="reveal-number"></span></p>
+        <p id="reveal-title" class="reveal-title"></p>
+        <button id="reveal-close" type="button" class="primary">ปิด แล้วไปเพลงถัดไป</button>
+      </div>
+
+      <div id="control-card" class="card" aria-label="ปุ่มควบคุม">
+        <p id="status" class="status">กำลังโหลดตัวเล่น…</p>
+        <div class="buttons">
+          <button id="prev-btn" type="button" disabled>⏮ ย้อนกลับ</button>
+          <button id="replay-btn" type="button" disabled>↺ เล่นอีกครั้ง</button>
+          <button id="play-btn" type="button" class="primary" disabled>▶ เล่น</button>
+          <button id="more-btn" type="button" disabled>+ ฟังอีกนิด</button>
+          <button id="next-btn" type="button" disabled>ถัดไป ⏭</button>
+        </div>
+        <div class="volume">
+          <button id="mute-btn" type="button" class="icon" aria-label="ปิดเสียง" disabled>🔊</button>
+          <input id="volume" type="range" min="0" max="100" step="1" value="100" aria-label="ระดับเสียง" disabled>
+          <span id="volume-label" class="volume-label">100%</span>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script type="module" src="js/main.js?v=1"></script>
+</body>
+</html>
