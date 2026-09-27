@@ -2,6 +2,8 @@
 
 เกมทายเพลงจากเพลย์ลิสต์ YouTube สำหรับเล่นกับเพื่อนบนจอเดียว
 
+**เล่นได้ที่: https://thitipong-png.github.io/song-quiz/**
+
 ## รันในเครื่อง
 
 ห้ามดับเบิลคลิกเปิด `index.html` เพราะ YouTube ต้องได้รับ HTTP Referer ถ้าเปิดแบบ `file://` จะขึ้น error 153
